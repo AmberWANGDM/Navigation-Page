@@ -105,9 +105,11 @@ parcelRequire = (function (modules, cache, entry, globalName) {
   return newRequire;
 })({"epB2":[function(require,module,exports) {
 var $siteList = $('.site-list');
+$siteList.sortable({ filter: '.last' });
 var $lastBox = $siteList.find('li.last');
 var liObject = JSON.parse(localStorage.getItem('li'));
-var hashMap = [{ logo: 'G', url: 'https://google.com' }, { logo: 'B', url: 'https://bilibili.com' }];
+var hashMap = [{ logo: 'G', url: 'https://google.com' }, { logo: 'B', url: 'https://bilibili.com' }, { logo: 'I', url: 'https://www.iconfont.cn' }, { logo: 'V', url: 'https://cn.vuejs.org/guide/introduction.html' }, { logo: 'J', url: 'https://jirengu.com/' }, { logo: 'G', url: 'https://github.com/' }, { logo: 'R', url: 'https://zh-hans.reactjs.org/' }];
+
 var removePrefix = function removePrefix(url) {
   return url.replace('https://', '').replace('www.', '').replace(/\/.*/, '');
 };
@@ -160,5 +162,10 @@ $(document).on('keypress', function (e) {
     }
   }
 });
+
+// 修复输入框输入英文字母会跳转bug
+$('.search-area>input').on('keypress', function (e) {
+  e.stopPropagation();
+});
 },{}]},{},["epB2"], null)
-//# sourceMappingURL=main.c1d8d758.map
+//# sourceMappingURL=main.dd7c5edc.map

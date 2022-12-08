@@ -105,9 +105,11 @@ parcelRequire = (function (modules, cache, entry, globalName) {
   return newRequire;
 })({"main.js":[function(require,module,exports) {
 var $siteList = $('.site-list');
+$siteList.sortable({ filter: '.last' });
 var $lastBox = $siteList.find('li.last');
 var liObject = JSON.parse(localStorage.getItem('li'));
-var hashMap = [{ logo: 'G', url: 'https://google.com' }, { logo: 'B', url: 'https://bilibili.com' }];
+var hashMap = [{ logo: 'G', url: 'https://google.com' }, { logo: 'B', url: 'https://bilibili.com' }, { logo: 'I', url: 'https://www.iconfont.cn' }, { logo: 'V', url: 'https://cn.vuejs.org/guide/introduction.html' }, { logo: 'J', url: 'https://jirengu.com/' }, { logo: 'G', url: 'https://github.com/' }, { logo: 'R', url: 'https://zh-hans.reactjs.org/' }];
+
 var removePrefix = function removePrefix(url) {
   return url.replace('https://', '').replace('www.', '').replace(/\/.*/, '');
 };
@@ -160,6 +162,11 @@ $(document).on('keypress', function (e) {
     }
   }
 });
+
+// 修复输入框输入英文字母会跳转bug
+$('.search-area>input').on('keypress', function (e) {
+  e.stopPropagation();
+});
 },{}],"../../../../../../.config/yarn/global/node_modules/parcel/src/builtins/hmr-runtime.js":[function(require,module,exports) {
 var global = arguments[3];
 var OVERLAY_ID = '__parcel__error__overlay__';
@@ -189,7 +196,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = '' || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + '49358' + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + '60065' + '/');
   ws.onmessage = function (event) {
     var data = JSON.parse(event.data);
 
