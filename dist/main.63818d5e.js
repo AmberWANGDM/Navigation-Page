@@ -107,7 +107,7 @@ parcelRequire = (function (modules, cache, entry, globalName) {
 var $siteList = $('.site-list');
 var $lastBox = $siteList.find('li.last');
 var liObject = JSON.parse(localStorage.getItem('li'));
-var hashMap = liObject || [{ logo: 'G', url: 'https://google.com' }, { logo: 'B', url: 'https://bilibili.com' }];
+var hashMap = liObject || [{ logo: 'G', url: 'https://google.com', title: '谷歌' }, { logo: 'B', url: 'https://bilibili.com', title: 'bilibili' }];
 var removePrefix = function removePrefix(url) {
   return url.replace('https://', '').replace('www.', '').replace(/\/.*/, '');
 };
@@ -115,7 +115,7 @@ var removePrefix = function removePrefix(url) {
 function render() {
   $siteList.find('li:not(li.last)').remove();
   hashMap.forEach(function (node, index) {
-    var $li = $('\n      <li>\n        <div class="site">\n          <div class="logo">' + node.logo[0] + '</div>\n          <div class="link">' + removePrefix(node.url) + '</div>\n          <div class="close">\n            <svg class="icon">\n              <use xlink:href="#icon-del"></use>\n            </svg>\n          </div>\n        </div>\n      </li>\n    ').insertBefore($lastBox);
+    var $li = $('\n      <li>\n        <div class="site">\n          <div class="logo">' + node.logo[0] + '</div>\n          <div class="link">' + node.title + '</div>\n          <div class="close">\n            <svg class="icon">\n              <use xlink:href="#icon-del"></use>\n            </svg>\n          </div>\n        </div>\n      </li>\n    ').insertBefore($lastBox);
     $li.on('click', function () {
       window.open(node.url);
     });
