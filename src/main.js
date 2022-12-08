@@ -1,9 +1,9 @@
 const $siteList = $('.site-list')
 const $lastBox = $siteList.find('li.last')
 let liObject = JSON.parse(localStorage.getItem('li'))
-const hashMap = liObject || [
-  { logo: 'G', url: 'https://google.com', title: '谷歌' },
-  { logo: 'B', url: 'https://bilibili.com', title: 'bilibili' },
+const hashMap = [
+  { logo: 'G', url: 'https://google.com' },
+  { logo: 'B', url: 'https://bilibili.com' },
 ]
 const removePrefix = (url) => {
   return url.replace('https://', '').replace('www.', '').replace(/\/.*/, '')
@@ -16,7 +16,7 @@ function render() {
       <li>
         <div class="site">
           <div class="logo">${node.logo[0]}</div>
-          <div class="link">${node.title}</div>
+          <div class="link">${removePrefix(node.url)}</div>
           <div class="close">
             <svg class="icon">
               <use xlink:href="#icon-del"></use>
@@ -61,5 +61,10 @@ onunload = () => {
 }
 
 $(document).on('keypress', (e) => {
-  console.log(e.keyCode === 13)
+  const { key } = e
+  for (let i = 0; i < hashMap.length; i++) {
+    if (hashMap[i].logo.toLowerCase() === key) {
+      window.open(hashMap[i].url)
+    }
+  }
 })
