@@ -1,10 +1,17 @@
 const $siteList = $('.site-list')
+$siteList.sortable({ filter: '.last' })
 const $lastBox = $siteList.find('li.last')
 let liObject = JSON.parse(localStorage.getItem('li'))
 const hashMap = [
   { logo: 'G', url: 'https://google.com' },
   { logo: 'B', url: 'https://bilibili.com' },
+  { logo: 'I', url: 'https://www.iconfont.cn' },
+  { logo: 'V', url: 'https://cn.vuejs.org/guide/introduction.html' },
+  { logo: 'J', url: 'https://jirengu.com/' },
+  { logo: 'G', url: 'https://github.com/' },
+  { logo: 'R', url: 'https://zh-hans.reactjs.org/' },
 ]
+
 const removePrefix = (url) => {
   return url.replace('https://', '').replace('www.', '').replace(/\/.*/, '')
 }
@@ -67,4 +74,9 @@ $(document).on('keypress', (e) => {
       window.open(hashMap[i].url)
     }
   }
+})
+
+// 修复输入框输入英文字母会跳转bug
+$('.search-area>input').on('keypress', (e) => {
+  e.stopPropagation()
 })
